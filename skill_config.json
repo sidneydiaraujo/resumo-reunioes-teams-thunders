@@ -1,0 +1,24 @@
+{
+  "work_email": "<seu-email-corporativo>",
+  "personal_draft_email": "<seu-email-pessoal>",
+  "teams_team": "<nome-do-time-no-teams>",
+  "teams_channel": "<nome-do-canal>",
+  "filters": {
+    "mode": "custom",
+    "ignore_title_contains": [
+      "[Refinamento]",
+      "Diálogo de Inovação"
+    ],
+    "ignore_recurring_not_organizer": true,
+    "ignore_team_patterns": [
+      {
+        "team_keywords": ["B2B2C"],
+        "meeting_types": ["DAILY", "Review", "Refinamento", "Alinhamento Técnico", "Planning"]
+      },
+      {
+        "team_keywords": ["Evolução e Regulatório"],
+        "meeting_types": ["DAILY", "Review", "Refinamento", "Alinhamento Técnico", "Planning"]
+      }
+    ]
+  }
+}
