@@ -2,9 +2,13 @@
 
 Configuração customizada da skill [resumo-reunioes-teams](https://github.com/sidneydiaraujo/resumo-reunioes-teams) para o contexto de um Scrum Master em uma empresa com múltiplos times de desenvolvimento.
 
+---
+
 ## Contexto
 
 O usuário participa de reuniões de vários times (B2B, Projetos, B2B2C, Evolução e Regulatório). Apenas reuniões organizadas por anfitriões específicos são resumidas — os demais organizadores geralmente conduzem cerimônias de rotina de times que têm seus próprios Scrum Masters.
+
+---
 
 ## Filtros configurados
 
@@ -44,19 +48,80 @@ Times com Scrum Masters próprios têm suas cerimônias de rotina ignoradas:
 - Dailys e alinhamentos dos times B2B e Projetos
 - Workshops, bate-papos de gestão, demos, alinhamentos pontuais
 
+---
+
+## Instalação
+
+### 1. Pré-requisitos
+
+- [Claude Code](https://claude.ai/code) instalado
+- Python 3.8 ou superior
+- Integração **Microsoft 365** habilitada no Claude Code
+
+> As dependências Python são instaladas automaticamente na primeira execução.
+
+### 2. Clone a skill base e este repositório
+
+**Windows (PowerShell):**
+```powershell
+Set-Location "$env:USERPROFILE\.claude\skills"
+git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams
+git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams-thunders
+```
+
+**macOS / Linux:**
+```bash
+cd ~/.claude/skills
+git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams
+git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams-thunders
+```
+
+### 3. Copie o arquivo de configuração para a skill base
+
+**Windows (PowerShell):**
+```powershell
+Copy-Item "resumo-reunioes-teams-thunders\skill_config.json" "resumo-reunioes-teams\"
+```
+
+**macOS / Linux:**
+```bash
+cp resumo-reunioes-teams-thunders/skill_config.json resumo-reunioes-teams/
+```
+
+### 4. Preencha seus dados no skill_config.json
+
+Abra `resumo-reunioes-teams/skill_config.json` e substitua os campos com seus dados:
+
+```json
+{
+  "work_email": "seu.email@empresa.com.br",
+  "personal_draft_email": "seu.email.pessoal@gmail.com",
+  "teams_team": "Nome do Time no Teams",
+  "teams_channel": "Nome do Canal"
+}
+```
+
+> Os filtros (`allowed_organizers`, `ignore_title_contains`, etc.) já estão configurados para o contexto Thunders — só os campos de email e Teams precisam ser preenchidos.
+
+### 5. Habilite a integração Microsoft 365 no Claude Code
+
+No Claude Code, acesse as configurações de integrações e habilite **Microsoft 365**. Na primeira vez, o Claude solicitará autenticação com sua conta corporativa.
+
+### 6. Reinicie o Claude Code
+
+Feche e reabra o Claude Code para carregar a skill.
+
+---
+
 ## Como usar
 
-1. Clone a skill base:
-   ```
-   git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams
-   ```
-2. Clone este repositório e copie o `skill_config.json` para a raiz da skill:
-   ```
-   git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams-thunders
-   copy resumo-reunioes-teams-thunders\skill_config.json resumo-reunioes-teams\
-   ```
-3. Preencha os campos `work_email`, `personal_draft_email`, `teams_team` e `teams_channel` no `skill_config.json` com seus dados
-4. A skill já estará configurada com os filtros acima
+```
+"Resume as reuniões de hoje"
+"Faz o resumo da reunião de B2B de ontem"
+"Resume as reuniões desta semana"
+```
+
+---
 
 ## Ajustando para seu contexto
 
@@ -83,3 +148,9 @@ A correspondência é parcial e sem distinção de maiúsculas — "Giovana Rodr
   }
 ]
 ```
+
+---
+
+## Integração com reunioes-consulta
+
+Após salvar resumos, você pode consultar o conteúdo das reuniões em linguagem natural. Instale também a skill **[reunioes-consulta](https://github.com/sidneydiaraujo/reunioes-consulta)** para ter o fluxo completo.
