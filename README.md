@@ -4,28 +4,45 @@ Configuração customizada da skill [resumo-reunioes-teams](https://github.com/s
 
 ## Contexto
 
-O usuário participa de reuniões de vários times (B2B, Projetos, B2B2C, Evolução e Regulatório), mas só quer resumir as reuniões que ele mesmo organiza ou nas quais tem participação ativa e relevante. Times de rotina dos quais ele apenas participa (dailys, reviews, plannings) são ignorados.
+O usuário participa de reuniões de vários times (B2B, Projetos, B2B2C, Evolução e Regulatório). Apenas reuniões organizadas por anfitriões específicos são resumidas — os demais organizadores geralmente conduzem cerimônias de rotina de times que têm seus próprios Scrum Masters.
 
 ## Filtros configurados
 
-### Ignorar por título
-- `[Refinamento]` — reuniões de refinamento de backlog (cerimônia recorrente, não gera resumo útil)
-- `Diálogo de Inovação` — série de reuniões de inovação recorrentes sem necessidade de acompanhamento
+### Anfitriões autorizados
 
-### Ignorar recorrentes de outros organizadores
-Reuniões recorrentes onde o usuário **não é o organizador** são ignoradas automaticamente. Isso cobre dailys, standups e outras cerimônias de times que ele acompanha mas não facilita.
+Somente reuniões criadas por um desses organizadores são processadas:
+
+- **Sidney de Araujo Silva** — Scrum Master principal
+- **Giovana Rodrigues**
+- **Eduardo Sozim**
+
+Qualquer reunião de outro anfitrião é ignorada automaticamente.
+
+### Ignorar por título
+
+Mesmo que criadas por um anfitrião autorizado, reuniões com os seguintes termos no título são sempre ignoradas:
+
+| Termo | Motivo |
+|---|---|
+| `[Refinamento]` | Cerimônia recorrente de backlog, não gera resumo útil |
+| `Diálogo de Inovação` | Série recorrente de inovação sem necessidade de acompanhamento |
+| `Release` | Evento de entrega — acompanhado por outros meios |
+| `Fim de garantia` | Evento pontual sem dinâmica de reunião relevante |
 
 ### Ignorar por time e tipo de reunião
+
+Times com Scrum Masters próprios têm suas cerimônias de rotina ignoradas:
+
 | Time | Tipos ignorados |
 |---|---|
 | B2B2C | Daily, Review, Refinamento, Alinhamento Técnico, Planning |
 | Evolução e Regulatório | Daily, Review, Refinamento, Alinhamento Técnico, Planning |
 
-Esses times têm Scrum Masters próprios. As reuniões de rotina deles não precisam de resumo separado.
-
 ### O que é processado
-- Qualquer reunião organizada pelo usuário
-- Reuniões não recorrentes com participação ativa (workshops, bate-papos de gestão, alinhamentos pontuais, demos)
+
+- Reuniões de qualquer tipo organizadas por Sidney, Giovana ou Eduardo
+- Dailys e alinhamentos dos times B2B e Projetos
+- Workshops, bate-papos de gestão, demos, alinhamentos pontuais
 
 ## Como usar
 
@@ -33,21 +50,36 @@ Esses times têm Scrum Masters próprios. As reuniões de rotina deles não prec
    ```
    git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams
    ```
-2. Copie o `skill_config.json` deste repositório para a raiz da skill
-3. Preencha os campos `work_email`, `personal_draft_email`, `teams_team` e `teams_channel` com seus dados
+2. Clone este repositório e copie o `skill_config.json` para a raiz da skill:
+   ```
+   git clone https://github.com/sidneydiaraujo/resumo-reunioes-teams-thunders
+   copy resumo-reunioes-teams-thunders\skill_config.json resumo-reunioes-teams\
+   ```
+3. Preencha os campos `work_email`, `personal_draft_email`, `teams_team` e `teams_channel` no `skill_config.json` com seus dados
 4. A skill já estará configurada com os filtros acima
 
 ## Ajustando para seu contexto
 
-Se você trabalha em uma estrutura similar mas com outros nomes de times, edite `skill_config.json`:
+### Trocar ou adicionar anfitriões
+
+Edite `allowed_organizers` em `skill_config.json`:
+
+```json
+"allowed_organizers": [
+  "Seu Nome Completo",
+  "Nome de Outro Colega"
+]
+```
+
+A correspondência é parcial e sem distinção de maiúsculas — "Giovana Rodrigues" bate em "Giovana Rodrigues (Thunders)" automaticamente.
+
+### Adicionar times com rotina própria
 
 ```json
 "ignore_team_patterns": [
   {
-    "team_keywords": ["Nome do Seu Time"],
+    "team_keywords": ["Nome do Time"],
     "meeting_types": ["DAILY", "Review", "Planning"]
   }
 ]
 ```
-
-Adicione quantos padrões precisar.
