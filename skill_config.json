@@ -9,7 +9,7 @@
       "[Refinamento]",
       "Diálogo de Inovação"
     ],
-    "ignore_recurring_not_organizer": true,
+    "ignore_recurring_not_organizer": false,
     "ignore_team_patterns": [
       {
         "team_keywords": ["B2B2C"],
