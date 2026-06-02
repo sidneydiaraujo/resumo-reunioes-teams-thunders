@@ -7,9 +7,15 @@
     "mode": "custom",
     "ignore_title_contains": [
       "[Refinamento]",
-      "Diálogo de Inovação"
+      "Diálogo de Inovação",
+      "Release",
+      "Fim de garantia"
     ],
-    "ignore_recurring_not_organizer": false,
+    "allowed_organizers": [
+      "Sidney de Araujo Silva",
+      "Giovana Rodrigues",
+      "Eduardo Sozim"
+    ],
     "ignore_team_patterns": [
       {
         "team_keywords": ["B2B2C"],
