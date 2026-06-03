@@ -6,25 +6,24 @@
   "filters": {
     "mode": "custom",
     "ignore_title_contains": [
-      "[Refinamento]",
       "Diálogo de Inovação",
-      "Release",
-      "Fim de garantia"
+      "All Hands",
+      "Treinamento",
+      "Training",
+      "Capacitação"
     ],
     "allowed_organizers": [
       "Sidney de Araujo Silva",
       "Giovana Rodrigues",
       "Eduardo Sozim"
     ],
-    "ignore_team_patterns": [
-      {
-        "team_keywords": ["B2B2C"],
-        "meeting_types": ["DAILY", "Review", "Refinamento", "Alinhamento Técnico", "Planning"]
-      },
-      {
-        "team_keywords": ["Evolução e Regulatório"],
-        "meeting_types": ["DAILY", "Review", "Refinamento", "Alinhamento Técnico", "Planning"]
-      }
-    ]
+    "allowed_title_contains": [
+      "[DEV] B2B",
+      "[DEV] B2B2C",
+      "[DEV] Projetos",
+      "[DEV] Evolução e Regulatório",
+      "[DEV] Growth"
+    ],
+    "ignore_team_patterns": []
   }
 }
